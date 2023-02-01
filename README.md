@@ -1,6 +1,6 @@
-# todo
+# TaskFlow
 
-A simple Todo application with Vue3.
+A progressive web app Todo application built with Vue3.
 
 ## Recommended IDE Setup
 
