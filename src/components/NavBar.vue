@@ -1,15 +1,18 @@
 <script setup>
 import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
+import { storeToRefs } from 'pinia';
+import { useThemeStore } from '../stores/themeStore';
 
-const theme = ref(null)
+const themeStore = useThemeStore()
+const { theme } = storeToRefs(themeStore)
+const { setTheme } = themeStore
+
 const body = document.documentElement;
-
-theme.value = "dark"
 body.dataset.theme = theme.value;
 
 const changeTheme = () => {
-    theme.value = theme.value === "dark" ? "light" : "dark";
+    setTheme()
     body.dataset.theme = theme.value;
 };
 </script>
