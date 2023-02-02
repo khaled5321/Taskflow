@@ -1,11 +1,16 @@
 <script setup>
 import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
+
 const theme = ref(null)
+const body = document.documentElement;
+
+theme.value = "dark"
+body.dataset.theme = theme.value;
 
 const changeTheme = () => {
-  let body = document.documentElement;
-  body.dataset.theme = body.dataset.theme === "light" ? "dark" : "light";
+    theme.value = theme.value === "dark" ? "light" : "dark";
+    body.dataset.theme = theme.value;
 };
 </script>
 
