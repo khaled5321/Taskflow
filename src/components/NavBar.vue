@@ -20,10 +20,20 @@ const changeTheme = () => {
 <template>
     <header>
         <nav class="container">
-            <h2>TASKFLOW</h2>
+            <RouterLink to="/" style="background: transparent;"><h2>TASKFLOW</h2></RouterLink>
             <ul>
                 <li>
-                    <a href="#" role="button" @click="changeTheme()">Theme</a>
+                    <transition name="theme" mode="out-in">
+                        <i class="material-icons" role="button" key=1
+                         v-if="theme === 'dark'" @click="changeTheme()">
+                         dark_mode
+                        </i>
+
+                        <i class="material-icons sun" role="button" key=2
+                        v-else @click="changeTheme()">
+                        light_mode
+                        </i>
+                    </transition>
                 </li>
                 <li>
                     <RouterLink to="/" role="button" class="secondary">Login</RouterLink>
@@ -49,7 +59,6 @@ header{
 }
 h2{
     margin:0px;
-    /* color: rgb(204, 94, 43); */
     text-shadow: 2px 2px 2px #000;
 }
 /* navbar */
@@ -57,4 +66,28 @@ h2{
     padding-top: 12px;
     align-items: center;
 }
+i{
+    scale: 2;
+    color: white;
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-top: 5px;
+    margin-right: 20px;
+}
+i.sun{
+    color: yellow;
+}
+
+.theme-enter-active, .theme-leave-active {
+    transition: all .2s ease-out;
+}
+.theme-enter-from, .theme-leave-to {
+    scale: 0;
+    opacity: 0;
+    transform: translateY(20%) rotateZ(100deg);
+}
+
 </style>
