@@ -78,7 +78,7 @@ i{
     margin-right: 20px;
 }
 i.sun{
-    color: yellow;
+    color: white;
 }
 
 .theme-enter-active, .theme-leave-active {

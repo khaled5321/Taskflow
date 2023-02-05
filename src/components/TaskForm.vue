@@ -48,7 +48,7 @@ const handleSubmit = () =>{
 <style scoped>
 form{
     margin-top: 15px;
-
+    margin-bottom: 0px;
 }
 @media only screen and (min-width: 900px) {
     form{
