@@ -52,8 +52,8 @@ form{
 }
 @media only screen and (min-width: 900px) {
     form{
-        padding-right: 100px;
-        padding-left: 100px;
+        padding-right: 200px;
+        padding-left: 200px;
     }
 }
 @media only screen and (min-width: 750px) {
@@ -64,7 +64,7 @@ form{
 } 
 input{
     height: 50px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 textarea{
     resize: none;
