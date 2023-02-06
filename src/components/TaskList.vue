@@ -6,12 +6,13 @@ const taskStore = useTaskStore()
 const { taskCount, tasks } = storeToRefs(taskStore)
 </script>
 <template>
-    <div>
+    <div class="head">
         <h3>You currently have {{ taskCount? taskCount: 0 }} tasks</h3>
     </div>
-    <div>
-        <article v-for="task, index in tasks" :key="task.id">
-            <p>{{ index }}</p>
+    <div class="cards">
+        <article v-for="task, index in tasks" :key="task.id"
+        :class="{firstcard: index===0}">
+            <p>{{ index+1 }}</p>
             <div class="headings">
                 <h4>{{task.task}}</h4>
                 <h5>{{task.description? task.description.slice(0,15)+"..." :"No description"}}</h5>
@@ -28,14 +29,22 @@ const { taskCount, tasks } = storeToRefs(taskStore)
 h3{
     margin-top: 5px;
     text-align: center;
+    margin-bottom: 0px;
+}
+.head{
+    
 }
 .headings{
     margin-bottom: 0px;
+}
+.firstcard{
+    margin-top: 5px;
 }
 article{
     display: flex;
     align-items: center;
     gap:20px;
+    
 }
 p{
     margin-bottom: 0px;
