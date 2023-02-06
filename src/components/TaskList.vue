@@ -11,30 +11,31 @@ const { taskCount, tasks } = storeToRefs(taskStore)
         <h3>You currently have {{ taskCount? taskCount: 0 }} tasks</h3>
     </div>
     <div class="cards">
-        <article v-for="task, index in tasks" :key="task.id"
-        :class="{firstcard: index===0}">
-            <p>{{ index+1 }}</p>
-            <div class="headings">
-                <h4 role="button">
-                    <del v-if="task.iscomplete">{{task.task}}</del>
-                    <template v-else>{{task.task}}</template>
-                </h4>
-                <h5>
-                    {{task.description? task.description.slice(0,15)+"..." :"No description"}}
-                </h5>
-            </div>
-            <div class="icons">
-                <!-- <i class="material-icons" role="button">edit</i> -->
-                <input type="checkbox" 
-                @input.change="taskStore.changeStatus(task.id)"
-                v-model="task.iscomplete"/>
-
-                <i 
-                class="material-icons" 
-                role="button"
-                @click="taskStore.removeTask(task.id)">delete</i>
-            </div>
-        </article>
+        <TransitionGroup name="list">
+            <article v-for="task, index in tasks" :key="task.id"
+            :class="{firstcard: index===0}">
+                <p>{{ index+1 }}</p>
+                <div class="headings">
+                    <h4 role="button">
+                        <del v-if="task.iscomplete">{{task.task}}</del>
+                        <template v-else>{{task.task}}</template>
+                    </h4>
+                    <h5>
+                        {{task.description? task.description.slice(0,15)+"..." :"No description"}}
+                    </h5>
+                </div>
+                <div class="icons">
+                    <!-- <i class="material-icons" role="button">edit</i> -->
+                    <input type="checkbox"
+                    @input.change="taskStore.changeStatus(task.id)"
+                    v-model="task.iscomplete"/>
+                    <i
+                    class="material-icons"
+                    role="button"
+                    @click="taskStore.removeTask(task.id)">delete</i>
+                </div>
+            </article>
+        </TransitionGroup>
     </div>
 </template>
 
@@ -54,6 +55,9 @@ h4{
 }
 .firstcard{
     margin-top: 5px;
+}
+.cards{
+    position: relative;
 }
 article{
     display: flex;
@@ -88,5 +92,18 @@ i{
 [data-theme="light"] i, [data-theme="light"] h4{
     color: rgb(27, 40, 50);
 }
-
+.list-move,
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+.list-leave-active {
+  position: absolute;
+  width: 100%;
+}
 </style>
