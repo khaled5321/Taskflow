@@ -4,6 +4,7 @@ import { useTaskStore } from '../stores/taskStore';
 
 const taskStore = useTaskStore()
 const { taskCount, tasks } = storeToRefs(taskStore)
+
 </script>
 <template>
     <div class="head">
@@ -14,12 +15,24 @@ const { taskCount, tasks } = storeToRefs(taskStore)
         :class="{firstcard: index===0}">
             <p>{{ index+1 }}</p>
             <div class="headings">
-                <h4>{{task.task}}</h4>
-                <h5>{{task.description? task.description.slice(0,15)+"..." :"No description"}}</h5>
+                <h4 role="button">
+                    <del v-if="task.iscomplete">{{task.task}}</del>
+                    <template v-else>{{task.task}}</template>
+                </h4>
+                <h5>
+                    {{task.description? task.description.slice(0,15)+"..." :"No description"}}
+                </h5>
             </div>
             <div class="icons">
-                <i class="material-icons" role="button">edit</i>
-                <i class="material-icons" role="button">delete</i>
+                <!-- <i class="material-icons" role="button">edit</i> -->
+                <input type="checkbox" 
+                @input.change="taskStore.changeStatus(task.id)"
+                v-model="task.iscomplete"/>
+
+                <i 
+                class="material-icons" 
+                role="button"
+                @click="taskStore.removeTask(task.id)">delete</i>
             </div>
         </article>
     </div>
@@ -31,8 +44,10 @@ h3{
     text-align: center;
     margin-bottom: 0px;
 }
-.head{
-    
+h4{
+    background: transparent;
+    padding: 0;
+    border: 0;
 }
 .headings{
     margin-bottom: 0px;
@@ -61,6 +76,7 @@ p{
     display: flex;
     margin-right: 0;
     margin-left: auto;
+    align-items: center;
     gap: 20px;
 }
 i{
