@@ -85,7 +85,7 @@ i{
     background: transparent;
     border: 0;
 }
-[data-theme="light"] i{
+[data-theme="light"] i, [data-theme="light"] h4{
     color: rgb(27, 40, 50);
 }
 
