@@ -10,7 +10,6 @@ const startDrag= (evt, draggable) =>{
     evt.dataTransfer.effectAllowed = 'move'  
     let index = tasks.value.findIndex(e => e.id === draggable.id);
     evt.dataTransfer.setData('taskIndex', index) 
-    console.log(index)
 }
 const onDrop =(evt, droppable)=> {      
     let draggableIndex = evt.dataTransfer.getData('taskIndex')
