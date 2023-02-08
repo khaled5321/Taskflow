@@ -5,6 +5,19 @@ import { useTaskStore } from '../stores/taskStore';
 const taskStore = useTaskStore()
 const { taskCount, tasks } = storeToRefs(taskStore)
 
+const startDrag= (evt, draggable) =>{
+    evt.dataTransfer.dropEffect = 'move'
+    evt.dataTransfer.effectAllowed = 'move'  
+    let index = tasks.value.findIndex(e => e.id === draggable.id);
+    evt.dataTransfer.setData('taskIndex', index) 
+    console.log(index)
+}
+const onDrop =(evt, droppable)=> {      
+    let draggableIndex = evt.dataTransfer.getData('taskIndex')
+    let droppableIndex = tasks.value.findIndex(e => e.id === droppable.id);
+    [tasks.value[draggableIndex], tasks.value[droppableIndex]] = [tasks.value[droppableIndex], tasks.value[draggableIndex]];
+}
+
 </script>
 <template>
     <div class="head">
@@ -12,7 +25,11 @@ const { taskCount, tasks } = storeToRefs(taskStore)
     </div>
     <div class="cards">
         <TransitionGroup name="list">
-            <article v-for="task, index in tasks" :key="task.id"
+            <article v-for="task, index in tasks" :key="task.id" draggable="true"  
+            @dragstart="startDrag($event, task)"
+            @drop="onDrop($event, task)"
+            @dragover.prevent
+            @dragenter.prevent
             :class="{firstcard: index===0}">
                 <p>{{ index+1 }}</p>
                 <div class="headings">
