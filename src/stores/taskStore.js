@@ -4,7 +4,6 @@ import { computed } from "vue";
 
 export const useTaskStore = defineStore("taskStore", () => {
   const tasks = ref([]);
-
   const taskCount = computed(() => tasks.value.length);
 
 
@@ -20,4 +19,4 @@ export const useTaskStore = defineStore("taskStore", () => {
 
   }
   return { tasks, addTask, taskCount, changeStatus, removeTask };
-});
+}, {persist: true});

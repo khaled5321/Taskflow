@@ -9,6 +9,16 @@ const { theme } = storeToRefs(themeStore)
 const { setTheme } = themeStore
 
 const body = document.documentElement;
+
+if(theme.value === ""){
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        theme.value = 'dark'
+    }
+    else{
+        theme.value = 'light'
+    }
+}
+
 body.dataset.theme = theme.value;
 
 const changeTheme = () => {
@@ -36,7 +46,7 @@ const changeTheme = () => {
                     </transition>
                 </li>
                 <li>
-                    <RouterLink to="/" role="button" class="secondary">Login</RouterLink>
+                    <RouterLink to="/" role="button" class="secondary" hidden="true">Login</RouterLink>
                 </li>
             </ul>
         </nav>
@@ -63,7 +73,7 @@ h2{
 }
 /* navbar */
 .container{
-    padding-top: 12px;
+    /* padding-top: 12px; */
     align-items: center;
 }
 i{
