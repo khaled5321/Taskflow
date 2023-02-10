@@ -17,6 +17,10 @@ const onDrop =(evt, droppable)=> {
     [tasks.value[draggableIndex], tasks.value[droppableIndex]] = [tasks.value[droppableIndex], tasks.value[draggableIndex]];
 }
 
+const editTask = ()=>{
+    return
+}
+
 </script>
 <template>
     <div class="head">
@@ -32,7 +36,7 @@ const onDrop =(evt, droppable)=> {
             :class="{firstcard: index===0}">
                 <p>{{ index+1 }}</p>
                 <div class="headings">
-                    <h4 role="button">
+                    <h4>
                         <del v-if="task.iscomplete">{{task.task}}</del>
                         <template v-else>{{task.task}}</template>
                     </h4>
@@ -41,10 +45,11 @@ const onDrop =(evt, droppable)=> {
                     </h5>
                 </div>
                 <div class="icons">
-                    <!-- <i class="material-icons" role="button">edit</i> -->
                     <input type="checkbox"
                     @input.change="taskStore.changeStatus(task.id)"
                     v-model="task.iscomplete"/>
+
+                    <i class="material-icons" role="button" @click="editTask()">edit</i>
                     <i
                     class="material-icons"
                     role="button"
@@ -60,11 +65,6 @@ h3{
     margin-top: 5px;
     text-align: center;
     margin-bottom: 0px;
-}
-h4{
-    background: transparent;
-    padding: 0;
-    border: 0;
 }
 .headings{
     margin-bottom: 0px;
@@ -83,8 +83,8 @@ article{
 }
 p{
     margin-bottom: 0px;
-    padding: 15px;
-    border-radius: 5%;
+    padding: 10px;
+    border-radius: 8%;
     color: black;
     background-color: white;
 }
