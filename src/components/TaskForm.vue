@@ -8,6 +8,7 @@ const { addTask } = taskStore
 
 const task = ref("")
 const taskDescription = ref("")
+
 const handleSubmit = () =>{
     if( task.value !== "" ){
         let new_task = {

@@ -1,6 +1,8 @@
 <script setup>
 import { storeToRefs } from 'pinia';
 import { useTaskStore } from '../stores/taskStore';
+import { ref } from 'vue';
+import EditModal from "./EditModal.vue";
 
 const taskStore = useTaskStore()
 const { taskCount, tasks } = storeToRefs(taskStore)
@@ -17,8 +19,16 @@ const onDrop =(evt, droppable)=> {
     [tasks.value[draggableIndex], tasks.value[droppableIndex]] = [tasks.value[droppableIndex], tasks.value[draggableIndex]];
 }
 
-const editTask = ()=>{
-    return
+const showModal=ref(null);
+
+const toggleModal=()=>{
+    showModal.value=!showModal.value
+}
+const taskID = ref("")
+
+const editTask = (id)=>{
+    taskID.value = id
+    toggleModal()
 }
 
 </script>
@@ -49,7 +59,7 @@ const editTask = ()=>{
                     @input.change="taskStore.changeStatus(task.id)"
                     v-model="task.iscomplete"/>
 
-                    <i class="material-icons" role="button" @click="editTask()">edit</i>
+                    <i class="material-icons" role="button" @click="editTask(task.id)">edit</i>
                     <i
                     class="material-icons"
                     role="button"
@@ -58,6 +68,8 @@ const editTask = ()=>{
             </article>
         </TransitionGroup>
     </div>
+
+    <EditModal v-if="showModal" :showModal="showModal" :taskID="taskID" @close-modal="toggleModal()"/>
 </template>
 
 <style scoped>
