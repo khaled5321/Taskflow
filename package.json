@@ -1,5 +1,5 @@
 {
-  "name": "todo",
+  "name": "taskflow",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -20,6 +20,9 @@
     "@vue/eslint-config-prettier": "^7.0.0",
     "eslint-plugin-vue": "^9.3.0",
     "prettier": "^2.7.1",
-    "vite": "^4.0.0"
+    "vite": "^4.0.0",
+    "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-purgecss": "^0.2.12",
+    "vite-plugin-pwa": "^0.14.4"
   }
 }
