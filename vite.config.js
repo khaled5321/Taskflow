@@ -1,13 +1,11 @@
 import { fileURLToPath, URL } from "node:url";
-
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
-import htmlPurge from 'vite-plugin-purgecss';
 import viteCompression from 'vite-plugin-compression';
 import { VitePWA } from 'vite-plugin-pwa'
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), viteCompression(), htmlPurge([htmlPurge()]), VitePWA({ 
+  plugins: [vue(), viteCompression(), VitePWA({ 
     registerType: 'autoUpdate', 
     includeAssets: ['favicon.ico'],
       manifest: {
